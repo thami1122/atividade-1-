@@ -1,25 +1,28 @@
-nota = float(input("Avalie o restaurante (0 a 5 estrelas): "))
 
-if nota == 5:
-    print("★★★★★ - Excelente! Comida maravilhosa e ótimo atendimento!")
+'''8- Calculadora Simples
+Enunciado:
+Crie um programa que simule uma calculadora simples. O usuário deve informar dois números e a operação desejada (+, -, *, /) e o programa deve exibir o resultado da operação.'''
 
-elif nota >= 4:
-    print("★★★★☆ - Muito bom! Voltaria com certeza.")
+num1 = float(input("Digite o primeiro número: "))
+num2 = float(input("Digite o segundo número: "))
 
-elif nota >= 3:
-    print("★★★☆☆ - Razoável, mas tem espaço para melhorar.")
+operacao = input("Digite a operação a ser realizada (+, -, *, /): ")
 
-elif nota >= 2:
-    print("★★☆☆☆ - Precisa melhorar em vários pontos.")
-
-elif nota >= 1:
-    print("★☆☆☆☆ - Experiência ruim, não recomendo.")
-
-elif nota >= 0:
-    print("☆☆☆☆☆ - Péssimo! Comida e serviço deixaram a desejar.")
-
+if operacao == "+":
+    resultado = num1 + num2
+    print(f"O resultado de {num1} + {num2} é: {resultado}")
+elif operacao == "-":
+    resultado = num1 - num2
+    print(f"O resultado de {num1} - {num2} é: {resultado}")
+elif operacao == "*":
+    resultado = num1 * num2
+    print(f"O resultado de {num1} * {num2} é: {resultado}")
+elif operacao == "/":
+    if num2 != 0:        
+        resultado = num1 / num2
+        print(f"O resultado de {num1} + {num2} é: {resultado}")
+    else:
+        print("Erro!!! divisão por zero não permitida.")
 else:
-    print("Nota inválida. Por favor, insira uma nota entre 0 e 5.")
-
-
+    print("Operação inválida.")
 

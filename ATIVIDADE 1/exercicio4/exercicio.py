@@ -1,13 +1,9 @@
-senha_correta = "1234"
+ano = int(input("Digite um ano: "))
 
-while True:
-    senha = input("Digite a senha: ")
-
-    if senha == senha_correta:
-        print("Acesso autorizado. Bem-vindo!")
-        break
-    else:
-        print("Senha incorreta. Tente novamente.\n")
+if (ano % 4 == 0) and ((ano % 100 != 0) or (ano % 400 == 0)):
+    print(f"O ano {ano} é bissexto.")
+else:
+    print(f"O ano {ano} não é bissexto.")
 
 
 

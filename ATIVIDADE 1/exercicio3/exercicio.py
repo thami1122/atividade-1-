@@ -1,10 +1,35 @@
 
 
 
-numero = int(input("Digite um número para a contagem regressiva: "))
+valor = float(input("Digite a temperatura: "))
+origem = input("Digite a unidade de origem (C, F, K): ").upper()
+destino = input("Digite a unidade de destino (C, F, K): ").upper()
 
-print("\nContagem regressiva:")
-for i in range(numero, -1, -1):
-    print(i)
+if origem == "C":
+    if destino == "F":
+        resultado = (valor * 9/5) + 32
+    elif destino == "K":
+        resultado = valor + 273.15
+    else:
+        resultado = valor
+elif origem == "F":
+    if destino == "C":
+        resultado = (valor - 32) * 5/9
+    elif destino == "K":
+        resultado = (valor - 32) * 5/9 + 273.15
+    else:
+        resultado = valor
+elif origem == "K":
+    if destino == "C":
+        resultado = valor - 273.15
+    elif destino == "F":
+        resultado = (valor - 273.15) * 9/5 + 32
+    else:
+        resultado = valor
+else:
+    resultado = None
 
-print("FIM!")
+if resultado is not None:
+    print(f"Temperatura convertida: {resultado:.2f} {destino}")
+else:
+    print("Unidade inválida informada.")
