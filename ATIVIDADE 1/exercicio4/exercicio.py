@@ -1,9 +1,10 @@
-ano = int(input("Digite um ano: "))
+'''4 - Crie um programa que continue pedindo uma senha ao usuário até que ele digite a senha correta. Quando a senha correta for digitada, o programa mostra uma mensagem de sucesso e interrompe o loop com break.'''
 
-if (ano % 4 == 0) and ((ano % 100 != 0) or (ano % 400 == 0)):
-    print(f"O ano {ano} é bissexto.")
-else:
-    print(f"O ano {ano} não é bissexto.")
-
-
-
+senha_correta = "123456"
+while True:
+    senha = input("Digita a senha: ")
+    if senha == senha_correta:
+        print("Acesso permitido!")
+        break
+    else:
+        print("Senha incorreta. Tente novamente.")

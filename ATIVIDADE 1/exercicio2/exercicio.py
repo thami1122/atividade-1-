@@ -1,15 +1,5 @@
-peso = float(input("Digite seu peso em kg: "))
-altura = float(input("Digite a sua altura em metros: "))
-imc = peso / (altura ** 2)
+'''2 - Crie um programa que solicite um número ao usuário e exiba a tabuada desse número de 1 a 10, utilizando a estrutura de repetição for.'''
 
-if imc < 18.5:
-    print("Classificação: Abaixo do peso")
-elif imc < 25:
-    print("Classificação: Peso normal")
-elif imc < 30:
-    print("Classificação: Sobrepeso")
-else:
-    print("Classificação: OBESO!!!")
-
-print(f"Seu IMC é: {imc:.2f}")
-
+numero = int(input("Digite um número para ver a tabuada: "))
+for i in range(1, 11):
+    print(f"{numero} * {i} = {numero * i}")

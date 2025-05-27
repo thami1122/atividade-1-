@@ -1,13 +1,12 @@
 
-idade = int(input("Digite sua idade: "))
+'''1 - Crie um programa que solicite ao usuário uma nota (de 0 a 10) e exiba uma mensagem dizendo se o aluno foi reprovado, em recuperação ou aprovado.
+Use as estruturas de decisão if, elif e else.'''
 
-if idade >= 0 and idade <= 12:
-    print("Classificação: Criança")
-elif idade >= 13 and idade <= 17:
-    print("Classificação: Adolescente")
-elif idade >= 18 and idade <= 59:
-    print("Classificação: Adulto")
-elif idade >= 60:
-    print("Classificação: Idoso")
+nota = int(input("Digite a nota do aluno (0 a 10): "))
+if nota >= 7:
+    print("Aluno aprovado.")
+elif nota >= 5:
+    print("Aluno em recuperação.")
 else:
-    print("Idade inválida!")
+    print("Aluno foi reprovado.")
+    

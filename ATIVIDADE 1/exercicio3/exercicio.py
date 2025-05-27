@@ -1,35 +1,7 @@
+'''3 - Crie um programa que faça uma contagem regressiva a partir de um número informado pelo usuário até 0. O programa deve mostrar cada número da contagem e, ao final, exibir "FIM!".'''
 
-
-
-valor = float(input("Digite a temperatura: "))
-origem = input("Digite a unidade de origem (C, F, K): ").upper()
-destino = input("Digite a unidade de destino (C, F, K): ").upper()
-
-if origem == "C":
-    if destino == "F":
-        resultado = (valor * 9/5) + 32
-    elif destino == "K":
-        resultado = valor + 273.15
-    else:
-        resultado = valor
-elif origem == "F":
-    if destino == "C":
-        resultado = (valor - 32) * 5/9
-    elif destino == "K":
-        resultado = (valor - 32) * 5/9 + 273.15
-    else:
-        resultado = valor
-elif origem == "K":
-    if destino == "C":
-        resultado = valor - 273.15
-    elif destino == "F":
-        resultado = (valor - 273.15) * 9/5 + 32
-    else:
-        resultado = valor
-else:
-    resultado = None
-
-if resultado is not None:
-    print(f"Temperatura convertida: {resultado:.2f} {destino}")
-else:
-    print("Unidade inválida informada.")
+inicio = int(input("Digite um número para a contagem regressiva: "))
+while inicio >= 0: # o while verifica a condição antes de cada repetição
+    print(inicio)
+    inicio -= 1 # diminui um valor para cada repetição
+print("FIM!")

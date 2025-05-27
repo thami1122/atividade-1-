@@ -1,9 +1,10 @@
+numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-import re
-palavra = input("Insira uma palavra ou uma frase: ")
-palavra_formatada = re.sub(r'[^a-zA-Z0-9]', '', palavra).lower()
-palavra_invertida = palavra_formatada[::-1]
-if palavra_formatada == palavra_invertida:
-    print(f"A palavra/frase {palavra} é um palíndromo.")
-else:
-    print(f"A palavra/frase {palavra} não é um palíndromo.")
+for numero in numeros:
+    if numero < 2:
+        continue  # 0 e 1 não são primos
+    for i in range(2, int(numero ** 0.5) + 1):
+        if numero % i == 0:
+            break  # Número não é primo
+    else:
+        print(f"{numero} é primo.")
