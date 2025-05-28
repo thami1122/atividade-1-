@@ -1,24 +1,24 @@
-# Solicita ao usuário a nota de avaliação (de 0 a 5)
-nota = float(input("Avalie o restaurante (0 a 5 estrelas): "))
-# Verifica a nota inserida pelo usuário e exibe a classificação correspondente
-# Se a nota for igual a 5
-if nota == 5:
-    print("★★★★★ - Excelente! Comida maravilhosa e ótimo atendimento!")    
-# Se a nota for maior ou igual a 4, mas menor que 5
-elif nota >= 4:
-    print("★★★★☆ - Muito bom! Voltaria com certeza.")    
-# Se a nota for maior ou igual a 3, mas menor que 4
-elif nota >= 3:
-    print("★★★☆☆ - Razoável, mas tem espaço para melhorar.")    
-# Se a nota for maior ou igual a 2, mas menor que 3
-elif nota >= 2:
-    print("★★☆☆☆ - Precisa melhorar em vários pontos.")    
-# Se a nota for maior ou igual a 1, mas menor que 2
-elif nota >= 1:
-    print("★☆☆☆☆ - Experiência ruim, não recomendo.")    
-# Se a nota for maior ou igual a 0, mas menor que 1
-elif nota >= 0:
-    print("☆☆☆☆☆ - Péssimo! Comida e serviço deixaram a desejar.")    
-# Caso a nota esteja fora do intervalo de 0 a 5
+'''Crie um programa para registrar as temperaturas de vários dias. O usuário deve digitar a temperatura em graus Celsius (ex: 25.5). O programa continua coletando até que o usuário digite "fim" ou colete 7 temperaturas. Valores inválidos devem ser ignorados. Ao final, exiba a média das temperaturas registradas.'''
+
+temperaturas = []
+
+for dia in range(7):
+    entrada = input(f"Digite a temperatura do dia {dia+1} (ou 'fim' para encerrar): ")
+
+    if entrada.lower() == 'fim':
+        break  # Encerra se o usuário digitar 'fim'
+
+    try:
+        temp = float(entrada)  # Tenta converter para float
+        temperaturas.append(temp)
+    except ValueError:
+        print("Entrada inválida. Digite um número válido (ex: 25.5).")
+        continue  # Ignora valores inválidos
+
+# Exibe os resultados
+if temperaturas:
+    media = sum(temperaturas) / len(temperaturas)
+    print(f"Temperaturas registradas: {temperaturas}")
+    print(f"Média das temperaturas: {media:.2f} °C")
 else:
-    print("Nota inválida. Por favor, insira uma nota entre 0 e 5.")
+    print("Nenhuma temperatura válida foi registrada.")

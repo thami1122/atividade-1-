@@ -1,30 +1,26 @@
-import random  # Importa o módulo random para gerar números aleatórios
+'''Solicite ao usuário números inteiros até que ele digite "0". Armazene os positivos e negativos separadamente em duas listas. Ignore valores não inteiros com try/except. No final, mostre quantos positivos e negativos foram inseridos.'''
 
-# Gera um número aleatório entre 1 e 10
-numero_secreto = random.randint(1, 10)
+positivos = []
+negativos = []
 
-# Inicializa a variável de tentativas
-tentativas = 0
-
-# Mensagem inicial
-print("Bem-vindo ao Jogo da Adivinhação!")
-print("Tente adivinhar o número entre 1 e 10.")
-
-# Loop que continuará até o usuário acertar o número
 while True:
-    # Solicita ao usuário um palpite e converte para inteiro
-    palpite = int(input("Digite seu palpite: "))
-    
-    # Incrementa a quantidade de tentativas
-    tentativas += 1
+    entrada = input("Digite um número inteiro (ou 0 para encerrar): ")
 
-    # Verifica se o palpite está correto
-    if palpite == numero_secreto:
-        print(f"Parabéns! Você acertou o número {numero_secreto} em {tentativas} tentativa(s)!")
-        break  # Sai do loop se acertar
-    elif palpite < numero_secreto:
-        print("Muito baixo! Tente novamente.")
-    else:
-        print("Muito alto! Tente novamente.")
+    try:
+        numero = int(entrada)
 
+        if numero == 0:
+            break  # Encerra o loop
 
+        if numero > 0:
+            positivos.append(numero)
+        else:
+            negativos.append(numero)
+
+    except ValueError:
+        print("Valor inválido. Digite um número inteiro.")
+        continue  # Pula entrada inválida
+
+# Exibe os resultados
+print(f"Total de positivos: {len(positivos)} -> {positivos}")
+print(f"Total de negativos: {len(negativos)} -> {negativos}")
