@@ -1,54 +1,56 @@
-'''Crie uma função que calcule a idade de uma pessoa em dias, com base no ano de nascimento informado pelo usuário.
-O programa deve considerar o ano atual como base para o cálculo.
-Use try/except para tratar erros de entrada e valide que o ano não pode ser maior que o ano atual.'''
+'''Desenvolva um programa que consulte informações de endereço a partir de um CEP fornecido pelo usuário, utilizando a API ViaCEP. O programa deve exibir o logradouro, bairro, cidade e estado correspondentes ao CEP consultado.
+** Instale o modulo requests - pip install requests **
+URL da API ViaCEP, passando o CEP informado
+    url = f"https://viacep.com.br/ws/{cep}/json/"'''
 
-# Importa a biblioteca datetime para obter o ano atual
-from datetime import datetime
+# Importamos o módulo requests para realizar a consulta HTTP à API do ViaCEP
+import requests
 
-# Define a função que calcula a idade em dias com base no ano de nascimento
-def calcular_idade_em_dias(ano_nascimento):
+# Função principal que consulta o endereço com base no CEP
+def consultar_cep():
     """
-    Calcula a idade em dias com base no ano de nascimento.
-    Parâmetro:
-        ano_nascimento (int): Ano de nascimento da pessoa
-    Retorno:
-        int: idade estimada em dias
+    Essa função solicita um CEP ao usuário, consulta a API ViaCEP
+    e exibe o logradouro, bairro, cidade e estado.
     """
-    ano_atual = datetime.now().year  # Pega o ano atual usando a data do sistema
-    idade_anos = ano_atual - ano_nascimento  # Calcula a idade em anos
-    idade_dias = idade_anos * 365  # Estima idade em dias (sem considerar anos bissextos)
-    return idade_dias  # Retorna a idade estimada em dias
 
-# Início do programa principal
-while True:
-    try:
-        # Solicita ao usuário o ano de nascimento
-        entrada = input("Digite o ano de nascimento (ou 'sair' para encerrar): ")
+    # Solicitamos o CEP ao usuário
+    cep = input("Informe o CEP (somente números): ").strip()
 
-        # Verifica se o usuário deseja sair do programa
-        if entrada.lower() == 'sair':
-            print("Programa encerrado.")
-            break  # Sai do laço
+    # Verificação simples: o CEP deve ter exatamente 8 dígitos numéricos
+    if len(cep) != 8 or not cep.isdigit():
+        print("CEP inválido. Deve conter exatamente 8 números.")
+        return
 
-        # Converte a entrada para inteiro
-        ano = int(entrada)
+    # Montamos a URL da API ViaCEP, passando o CEP informado
+    url = f"https://viacep.com.br/ws/{cep}/json/"
 
-        ano_atual = datetime.now().year  # Obtém novamente o ano atual
+    # Enviamos uma requisição GET para a API
+    resposta = requests.get(url)
 
-        # Verifica se o ano é válido (não pode ser no futuro)
-        if ano > ano_atual:
-            print("O ano de nascimento não pode ser maior que o ano atual.")
-            continue  # Volta ao início do laço
+    # Verificamos se a resposta foi bem-sucedida (HTTP status 200)
+    if resposta.status_code == 200:
+        # Convertendo o conteúdo da resposta para um dicionário
+        dados = resposta.json()
 
-        # Chama a função para calcular a idade em dias
-        idade_dias = calcular_idade_em_dias(ano)
+        # Verificamos se o CEP existe. A API retorna {"erro": true} se não existir
+        if "erro" in dados:
+            print("CEP não encontrado.")
+        else:
+            # Extraímos as informações desejadas
+            logradouro = dados.get("logradouro", "N/A")
+            bairro     = dados.get("bairro", "N/A")
+            cidade     = dados.get("localidade", "N/A")
+            estado     = dados.get("uf", "N/A")
 
-        # Exibe o resultado para o usuário
-        print(f"Sua idade estimada em dias é: {idade_dias} dias.")
+            # Exibimos as informações do endereço
+            print("\n=== Endereço Encontrado ===")
+            print("Logradouro:", logradouro)
+            print("Bairro    :", bairro)
+            print("Cidade    :", cidade)
+            print("Estado    :", estado)
+    else:
+        # Caso ocorra um erro na comunicação com a API
+        print(f"Erro ao consultar o CEP. Código de status: {resposta.status_code}")
 
-        # Após o cálculo com sucesso, encerra o programa
-        break
-
-    except ValueError:
-        # Caso a conversão da entrada para inteiro falhe
-        print("Entrada inválida. Por favor, digite um ano válido (ex: 1990) ou 'sair'.")
+# Executamos a função principal
+consultar_cep()

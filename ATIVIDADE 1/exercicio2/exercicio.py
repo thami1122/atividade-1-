@@ -1,41 +1,49 @@
-'''Crie uma função que calcule a gorjeta a ser deixada em um restaurante, baseada no valor total da conta e na porcentagem de gorjeta desejada.
-A função deve receber dois parâmetros:
-valor_conta (float): O valor total da conta
-porcentagem_gorjeta (float): A porcentagem da gorjeta (por exemplo, 10 para 10%)'''
+'''2 - Crie um programa que gera um perfil de usuário aleatório usando a API 'Random User Generator'. O programa deve exibir o nome, email e país do usuário gerado.
+** Instale o modulo requests - pip install requests **
+URL da API que retorna um usuário aleatório no formato JSON
+    url = "https://randomuser.me/api/"'''
 
-# Define a função chamada calcular_gorjeta com dois parâmetros: valor_conta e porcentagem_gorjeta
-def calcular_gorjeta(valor_conta, porcentagem_gorjeta):
+# Importamos o módulo requests para fazer chamadas HTTP
+import requests
+
+# Bloco principal do programa
+def gerar_usuario_aleatorio():
     """
-    Calcula o valor da gorjeta com base no valor da conta e na porcentagem desejada.
+    Essa função se conecta à API 'https://randomuser.me/api/',
+    obtém os dados de um usuário aleatório e imprime nome, email e país.
     """
-    # Calcula o valor da gorjeta: total da conta multiplicado pela porcentagem (dividido por 100)
-    gorjeta = valor_conta * (porcentagem_gorjeta / 100)
-    return gorjeta  # Retorna o valor calculado da gorjeta
+    
+    # URL da API que retorna um usuário aleatório no formato JSON
+    url = "https://randomuser.me/api/"
+    
+    # Fazemos uma requisição GET para obter os dados
+    resposta = requests.get(url)
+    
+    # Verificamos se a resposta foi bem-sucedida (código 200)
+    if resposta.status_code == 200:
+        # Convertendo o conteúdo da resposta para um dicionário Python
+        dados = resposta.json()
+        
+        # Acessando o primeiro (e único) resultado retornado
+        usuario = dados['results'][0]
 
-# A partir daqui começa o programa principal (fora da função)
+        # Extraindo os dados desejados:
+        # - Nome completo (título, primeiro nome e último nome)
+        nome_completo = f"{usuario['name']['title']} {usuario['name']['first']} {usuario['name']['last']}"
+        # - Email
+        email = usuario['email']
+        # - País
+        pais = usuario['location']['country']
+        
+        # Exibindo os dados do usuário
+        print("=== Perfil de Usuário Gerado ===")
+        print("Nome :", nome_completo)
+        print("Email:", email)
+        print("País :", pais)
 
-while True:  # Inicia um laço que só termina quando os valores forem válidos
-    try:
-        # Solicita o valor total da conta e converte para float
-        valor = float(input("Digite o valor total da conta (em reais): R$ "))
+    else:
+        # Se a requisição falhar, informamos o erro
+        print(f"Erro ao acessar a API. Código de status: {resposta.status_code}")
 
-        # Solicita a porcentagem da gorjeta e converte para float
-        porcentagem = float(input("Digite a porcentagem da gorjeta (%): "))
-
-        # Verifica se os valores são positivos
-        if valor < 0 or porcentagem < 0:
-            print("Os valores devem ser positivos. Tente novamente.")
-            continue  # Retorna ao início do laço se os valores forem negativos
-
-        # Chama a função calcular_gorjeta passando os valores digitados
-        valor_gorjeta = calcular_gorjeta(valor, porcentagem)
-
-        # Exibe o valor da gorjeta formatado com duas casas decimais
-        print(f"A gorjeta a ser deixada é: R$ {valor_gorjeta:.2f}")
-
-        # Encerra o programa após o cálculo com sucesso
-        break
-
-    except ValueError:
-        # Captura erro caso o usuário digite algo que não pode ser convertido em float
-        print("Entrada inválida. Digite números válidos para a conta e a porcentagem.")
+# Chamamos a função principal
+gerar_usuario_aleatorio()
