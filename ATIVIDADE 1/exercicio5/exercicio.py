@@ -1,25 +1,42 @@
-'''Crie um programa que solicite ao usuário a idade de várias pessoas. Armazene apenas idades válidas (entre 0 e 120) em uma lista. Use for, try/except, continue para ignorar entradas inválidas, e break para encerrar o programa se o usuário digitar "fim". No final, exiba a lista das idades válidas.'''
+def cadastrar_alunos():
+    alunos = {}
 
-idades = []
+    while True:
+        nome = input("Digite o nome do aluno (ou 'fim' para encerrar): ").strip()
+        if nome.lower() == "fim":
+            break
 
-for i in range(100):  # Limite máximo de 100 tentativas, pode ser ajustado
-    entrada = input("Digite a idade (ou 'fim' para encerrar): ")
+        notas = []
+        for i in range(1, 4):
+            while True:
+                try:
+                    nota = float(input(f"Digite a nota {i} para {nome}: "))
+                    if 0 <= nota <= 10:
+                        notas.append(nota)
+                        break
+                    else:
+                        print("Nota inválida. Digite um valor entre 0 e 10.")
+                except ValueError:
+                    print("Entrada inválida. Digite um número.")
 
-    if entrada.lower() == 'fim':
-        break  # Encerra o loop se o usuário quiser parar
+        alunos[nome] = notas
 
-    try:
-        idade = int(entrada)
+    return alunos
 
-        if 0 <= idade <= 120:
-            idades.append(idade)
-        else:
-            print("Idade inválida! Deve estar entre 0 e 120.")
-            continue  # Volta ao início do laço
 
-    except ValueError:
-        print("Valor inválido! Digite apenas números inteiros.")
-        continue  # Pula essa tentativa
+def calcular_medias(alunos):
+    medias = {}
+    for nome, notas in alunos.items():
+        media = sum(notas) / len(notas)
+        medias[nome] = media
+    return medias
 
-print(f"Idades válidas registradas: {idades}")
 
+def exibir_resultados(medias):
+    print("\n--- Médias dos alunos ---")
+    for nome, media in medias.items():
+        print(f"{nome}: {media:.2f}")
+
+    if medias:
+        melhor_aluno = max(medias, key=medias.get)
+        print(f"\nAluno com a maior média: {melhor_aluno} ({medias[melhor]()_

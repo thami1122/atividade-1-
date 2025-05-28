@@ -1,21 +1,11 @@
-'''Peça ao usuário que digite 10 números inteiros. Armazene apenas os números pares válidos em uma lista. Use try/except para capturar erros, continue para ignorar números ímpares ou inválidos, e exiba a lista final ao terminar.'''
+'''6 - Crie um programa que peça ao usuário o nome e a idade. Em seguida, exiba uma mensagem personalizada com o nome e a idade da pessoa. Toda a lógica deve estar dentro de uma função main(), e o programa deve ser executado com if __name__ == "__main__":.'''
 
-pares = []
-
-for i in range(10):
-    entrada = input(f"Digite o {i+1}º número inteiro: ")
-
+def main():
     try:
-        numero = int(entrada)
-
-        if numero % 2 == 0:
-            pares.append(numero)
-        else:
-            print("Número ímpar! Ignorado.")
-            continue  # Pula números ímpares
-
+        nome = input("Digite seu nome: ")
+        idade = int(input("Digite a sua idade: "))
+        print(f"Ola, {nome}! Você tem {idade} anos.")
     except ValueError:
-        print("Entrada inválida! Digite apenas números inteiros.")
-        continue  # Pula entrada inválida
-
-print(f"Números pares válidos: {pares}")
+        print("Erro: A idade deve ser um número inteiro.")
+if __name__ == "__main__":
+    main()
